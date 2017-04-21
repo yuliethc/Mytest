@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?> <!-- ********************************************************************** --> 
+<!-- Account - Price List on Invoice for Odoo --> <!-- Copyright (C) 2015- Today GRAP (http://www.grap.coop) --> <!-- 
+@author Sylvain LE GAL (https://twitter.com/legalsylvain) --> <!--This program is free software: you can redistribute it 
+and/or modify --> <!--it under the terms of the GNU Affero General Public License as --> <!--published by the Free 
+Software Foundation, either version 3 of the --> <!--License, or (at your option) any later version.  --> <!--This 
+program is distributed in the hope that it will be useful, --> <!--but WITHOUT ANY WARRANTY; without even the implied 
+warranty of --> <!--MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the --> <!--GNU Affero General Public 
+License for more details.  --> <!--You should have received a copy of the GNU Affero General Public License--> <!--along 
+with this program.  If not, see <http://www.gnu.org/licenses/>.  --> <!-- 
+********************************************************************** --> <openerp>
+    <data> <!-- Model: account.invoice -->
+        <record id="view_account_invoice_line_customer_form" model="ir.ui.view">
+            <field name="model">account.invoice.line</field>
+            <field name="inherit_id" ref="account.view_invoice_line_form"/>
+            <field name="arch" type="xml">
+                <field name="product_id" position="before">
+                    <field name="x_accion"/>
+                </field>
+            </field>
+        </record>
+        <record id="view_account_invoice__line_tree" model="ir.ui.view">
+            <field name="model">account.invoice.line</field>
+            <field name="inherit_id" ref="account.view_invoice_line_tree"/>
+            <field name="arch" type="xml">
+                <field name="name" position="before">
+                    <field name="x_accion"/>
+                </field>
+            </field>
+        </record>
+<!--        <record id="view_account_invoice_search" model="ir.ui.view">
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.view_account_invoice_filter"/>
+            <field name="arch" type="xml">
+                <xpath expr="//filter[@string='Partner']" position="after">
+                    <filter string="Pricelist" context="{'group_by':'pricelist_id'}"/>
+                </xpath>
+            </field> 
+        </record>  -->
+
+
+
+        <record model="ir.ui.view" id="view_sale_order_form">
+            <field name="name">account.invoice_price.view</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="model">account.invoice</field>
+            <field name="arch" type="xml">
+                <button name="action_cancel_draft" position="after">
+                    <button name="update_prices" states="cancel" string="Aplicar complementos" type="action" groups="base.group_user" 
+attrs="{'invisible':[('state', '!=', 'draft')]}" context="{'default_type': 'sale'}"/>
+                </button>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="invoice_supplier_form">
+            <field name="name">account.invoice_supplier.view</field>
+            <field name="inherit_id" ref="account.invoice_supplier_form"/>
+            <field name="model">account.invoice</field>
+            <field name="arch" type="xml">
+                <button name="invoice_cancel" position="after">
+                    <button name="update_prices" states="cancel" string="Aplicar complementos" type="action" groups="base.group_user" 
+attrs="{'invisible':[('state', '!=', 'draft')]}" context="{'default_type': 'purchase'}"/>
+                </button>
+            </field>
+        </record>
+
+
+
+
+<record id="view_account_invoice_form" model="ir.ui.view">
+            <field name="name">account_update_prices.wizard</field>
+            <field name="model">account_invoice_update</field>
+            <field name="arch" type="xml"> 
+                <form string="Update Prices Wizard">
+                    <group>
+                        <field name="type" invisible="1"/>
+                        <field name="pricelist_id" domain="[('type', '=', type)]"/>
+                    </group>
+                    <footer>
+                        <button string="Update Prices" name="update_prices" type="object" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                </footer>
+                </form>
+            </field>
+        </record>
+        <record id="action_update_prices_list" model="ir.actions.act_window">
+            <field name="name">Update Prices</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">account_invoice_update</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+</data> </openerp>
+

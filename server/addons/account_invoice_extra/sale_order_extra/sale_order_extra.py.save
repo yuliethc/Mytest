@@ -1,0 +1,22 @@
+# -*- encoding: utf-8 -*-
+ 
+#importa la clase osv del modulo osv y fields
+from openerp.osv import fields, osv, model
+ 
+#Crea una clase llamada datos_presupuesto que hereda de la clase datos_presupuesto padre que esta en /opt/openerp/server/openerp/addons/product
+#En openobject hay varios tipos de herencia averiguar mas del tema
+#Aqui las clases tienen un atributo _name que es el nombre de la tabla que existe o se creara cuando instala el modulo en postgresql
+ 
+class datos_presupuesto(osv.osv):
+    _name = 'sale.order' # Aqui va el mismo nombre de la clase que se hereda
+    _inherit = 'sale.order' # Permite la herencia propiamente dicho del modulo product 
+ 
+    #Agrega varios campos al formulario de sale_order o a la tabla datos_presupuesto
+    _columns = {
+                'x_recogido': fields.char('Nombre asistido',size=40, required=True),
+		'x_vehiculo': fields.char('Vehiculo',size=40, required=True),
+		'x_matricula': fields.char('Matricula',size=10, required=True)				'x_comentarios': fields.text('Comentarios'),
+				'x_imagen' : fields.Many2many('ir.attachment', 'Imagenes')
+        }
+datos_presupuesto()
+

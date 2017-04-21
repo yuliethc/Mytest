@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<!-- Siempre las lineas xml van a ir delimitados por la etiqueta openerp-->
+<openerp>
+        <!-- Las etiquetas data tambien delimitan a las record siempre -->
+        <data>
+                <!-- La etiqueta record son la que permitiran mostrar el campo color en el formulario producto-->
+                <record model='ir.ui.view' id='sale_order_extra_view'>
+                        <field name='name'>sale.order.form.extra</field>
+                        <field name='model'>sale.order</field>
+                        <field name='inherit_id' ref='sale.view_order_form'/>
+                        <field name='type'>form</field>
+                        <field name='arch' type='xml'>
+                                <field name="partner_id" position="after"> <!-- after: despues del campo partner_id -->
+                                        <field name="x_vehiculo"/> <!-- llamamos al campo con el atributo name de field -->
+                                        <field name="x_matricula"/> <!-- llamamos al campo con el atributo name de field -->
+                                        <field name="x_recogido"/> <!-- llamamos al campo con el atributo name de field -->
+                                        <field name="x_comentarios"/>
+                                </field>
+                       </field>
+                 </record>
+
+                <record model='ir.ui.view' id='sale_order_extra_view2'>
+                        <field name='name'>sale.order.form.extra2</field>
+                        <field name='model'>sale.order</field>
+                        <field name='inherit_id' ref='sale.view_order_form'/>
+                        <field name='type'>form</field>
+                         <field name='arch' type='xml'>
+                                <field name="client_order_ref" position="after"> <!-- after: despues del campo partner_id -->
+					<field name="x_telefono"/>
+                                        <field name="x_imagen" widget="many2many_binary" string="Agregar documentación" />  llamamos al campo $ 
+<!--					<field name="x_telefono"/>  -->
+                                </field>
+                       </field>
+                 </record>
+
+        </data>
+</openerp>
