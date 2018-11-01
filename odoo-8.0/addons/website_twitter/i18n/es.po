@@ -36,7 +36,7 @@ msgstr "Copiar/Pegar clave API y palabra secreta a continuación"
 #. module: website_twitter
 #: view:website.config.settings:website_twitter.view_website_config_settings
 msgid "Create a new Twitter application on"
-msgstr "Crear una nueva aplicación Twiter en"
+msgstr "Crear una nueva aplicación Twitter en"
 
 #. module: website_twitter
 #: field:website.twitter.tweet,create_uid:0
@@ -165,7 +165,7 @@ msgstr "Tuits"
 #. module: website_twitter
 #: view:website.config.settings:website_twitter.view_website_config_settings
 msgid "Twitter API"
-msgstr "API de Twiter"
+msgstr "API de Twitter"
 
 #. module: website_twitter
 #: help:website,twitter_api_key:0
